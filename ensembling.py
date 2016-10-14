@@ -12,7 +12,7 @@ import pandas as pd
 
 # default values
 dataver = 2
-num_rand = 61
+num_rand = 2
 
 ## User inputs
 for i in range(1,len(sys.argv)):

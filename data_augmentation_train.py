@@ -11,7 +11,7 @@ import pandas as pd
 
 INPUT_WIDTH = 19 # Any length >= 19, which is the max no. of time obs per hour
 CV = 0 # Cross validation set label
-NUM_RAND = 60 # No. of augmented samples
+NUM_RAND = 2 # No. of augmented samples ,original 60  too many;
 COLUMNS = ['Id','minutes_past', 'radardist_km', 'Ref', 'Ref_5x5_10th',
        'Ref_5x5_50th', 'Ref_5x5_90th', 'RefComposite',
        'RefComposite_5x5_10th', 'RefComposite_5x5_50th',
@@ -37,7 +37,7 @@ def extend_series(X, rng, target_len=19):
         reps = [1]*(curr_len)
         add_ind = rng.randint(0, curr_len, size=extra_needed)
         
-        new_reps = [np.sum(add_ind==j) for j in xrange(curr_len)]
+        new_reps = [np.sum(add_ind==j) for j in range(curr_len)]
         new_reps = np.array(reps) + np.array(new_reps)
         X = np.repeat(X, new_reps, axis=0)
     return X
@@ -47,8 +47,8 @@ def extend_series(X, rng, target_len=19):
 # Any lists would do...
 rng_seed_list1 = [234561, 23451, 2341, 231, 21, 678901, 67891, 6781, 671, 16,
                   77177]
-rng_seed_list2 = range(9725, 9727+50*7, 7)
-rng_seed_list3 = range(9726, 9728+50*7, 7)
+rng_seed_list2 = [range(9725, 9727+50*7, 7)]
+rng_seed_list3 = [range(9726, 9728+50*7, 7)]
 rng_seed_list = rng_seed_list1 + rng_seed_list2 + rng_seed_list3
 assert len(rng_seed_list) >= NUM_RAND
 
@@ -78,8 +78,8 @@ for jj, rng_seed in enumerate(rng_seed_list[0:NUM_RAND]):
         y_output[i]= y
         i += 1
     
-    print "X.shape", X.shape
-    print "output.shape", output.shape
+    print("X.shape", X.shape)
+    print("output.shape", output.shape)
     
     np.save("./train/data_train_augmented_cv%s_t%s_rand%s.npy" %
             (CV, INPUT_WIDTH, jj), output)

@@ -15,8 +15,12 @@ THRESHOLD = 73
 N_FOLDS = 21
 RND_SEED = 56
 
+#####  set default dir ##### 
+os.chdir('D:/gitcode/kaggle-Rain/')
+
 ####### 1. Import training data and extract ids #######
 train_raw = pd.read_csv("./data/train.csv")
+# train_raw = pd.read_csv("./data/train.csv")
 raw_ids_all = train_raw["Id"]
 raw_ids = raw_ids_all.unique()
 
@@ -94,6 +98,7 @@ test_new = test_new.reset_index(drop=True)
 
 np.save("./data/processed_test", np.array(test_new))
 np.save("./test/obs_ids_test", test_raw_ids)
+
 
 
 

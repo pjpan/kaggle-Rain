@@ -16,7 +16,6 @@ import theano.tensor as T
 
 from NN_architectures import build_1Dregression_v1
 
-
 ############################### Main ################################
 def do_prediction(test_batch_multiple=5741, # No. of minibatches per batch
                   test_minibatch_size=125,
@@ -120,7 +119,7 @@ def do_prediction(test_batch_multiple=5741, # No. of minibatches per batch
     ###################################################  
     print("Begin predicting...")
     this_test_prediction= np.concatenate([test_model(i) for i in 
-                                            xrange(test_batch_multiple)])
+                                            range(test_batch_multiple)])
 
     ###################################################                                
     ################# 8. Save files  ##################

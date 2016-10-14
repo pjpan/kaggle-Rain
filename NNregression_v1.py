@@ -19,9 +19,10 @@ import theano.tensor as T
 
 from NN_architectures import build_1Dregression_v1
 
+theano.config.floatX = 'float32'
 
 ############################### Main ################################
-def do_regression(num_epochs=60, # No. of epochs to train
+def do_regression(num_epochs=2, # No. of epochs to train
                   init_file=None,  # Saved parameters to initialise training
                   epoch_size=680780,  # Whole dataset size
                   valid_size=34848,
@@ -125,7 +126,7 @@ def do_regression(num_epochs=60, # No. of epochs to train
         % (cross_val)
         ).astype(theano.config.floatX)     
     
-    print "chunk_valid_answers.shape", chunk_valid_answers.shape
+    print("chunk_valid_answers.shape", chunk_valid_answers.shape)
     print("Assigning validation data...")
     valid_set_y.set_value(chunk_valid_answers[:])
     valid_set_x.set_value(chunk_valid_data.transpose(0,2,1))
@@ -202,7 +203,7 @@ def do_regression(num_epochs=60, # No. of epochs to train
     eval_index = 0
     aug_index = 0
     
-    for batch in xrange(max_train_gen_calls):
+    for batch in range(max_train_gen_calls):
         start_time = time.time()        
         chunk_train_data = np.load(
             "./train/data_train_augmented_cv%s_t%s_rand%s.npy" %
@@ -217,7 +218,7 @@ def do_regression(num_epochs=60, # No. of epochs to train
         train_set_x.set_value(chunk_train_data.transpose(0, 2, 1))
         
         # Iterate over minibatches in each batch
-        for mini_index in xrange(train_batch_multiple):
+        for mini_index in range(train_batch_multiple):
             this_rate = np.float32(rate_init*(rate_decay**cum_iterations))
             this_train_loss += train_model(mini_index, this_rate)
             cum_iterations += 1
@@ -226,7 +227,7 @@ def do_regression(num_epochs=60, # No. of epochs to train
             if (cum_iterations % eval_multiple == 0):
                 this_train_loss = this_train_loss / eval_multiple
                 this_valid_loss = np.mean([validate_model(i) for
-                                    i in xrange(valid_batch_multiple)])
+                                    i in range(valid_batch_multiple)])
                 train_eval_scores[eval_index] = this_train_loss
                 valid_eval_scores[eval_index] = this_valid_loss
                 
