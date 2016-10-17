@@ -1,3 +1,7 @@
+```
+forked from simaaron/kaggle-Rain
+```
+
 How Much Did It Rain? II
 =================
 Kaggle competition winning solution
@@ -31,7 +35,7 @@ mkdir data
 
 
 ### Download the training and test data
-The training and test data can be downloaded from the Kaggle competition webpage at this [link](https://www.kaggle.com/c/how-much-did-it-rain-ii/data). The two extracted files `train.csv` and `test.csv` should be placed in the `data` folder. 
+The training and test data can be downloaded from the Kaggle competition webpage at this [link](https://www.kaggle.com/c/how-much-did-it-rain-ii/data). The two extracted files `train.csv` and `test.csv` should be placed in the `data` folder.
 
 Note: the benchmark sample solution and code provided by Kaggle are not required.
 
@@ -66,7 +70,7 @@ The list of functions corresponding to the different models can be found in the 
 
 ```
 python NNregression_v*.py -v=*
-``` 
+```
 The outputs from different models are continually saved into separate output folders. These include the files `training_scores.txt` and `validation_scores.txt` which, for monitoring purposes, give the evolution of the training and validation errors respectively. The file `model.npz` is the current best fitting set of model parameters (w.r.t. the validation holdout set), and the `last_learn_rate.txt` records the current (decayed) learning rate.
 
 ### Generate predictions from augmented test sets
@@ -98,14 +102,8 @@ python ensembling.py -v=1 -nr=61
 
 This averages the 61 predictions of the model 'v1' and saves it to the file `ens_submission_v1_61ave_mean.csv`.
 
-The individual predictions from the models 'v1' and 'v2' would place one 2nd/3rd in the competition. A straight average of the two solutions would be sufficient for 1st place. 
+The individual predictions from the models 'v1' and 'v2' would place one 2nd/3rd in the competition. A straight average of the two solutions would be sufficient for 1st place.
 
 
-
-
-
-
-
-
-
-
+### difference between V1 and V2
+ hidden layers is different，other process  is same.
